@@ -6,6 +6,7 @@ const server = express();
 
 //Configures routes
 const userRoutes = require('./user/user-routes.js')
+const relationshipRoutes = require('./user/relationship/relationship-routes.js')
 
 //middleware
 server.use(helmet())
@@ -14,6 +15,8 @@ server.use(express.json())
 
 //TODO: After schemas create routes
 server.use('/users', userRoutes)
+server.use('/relationship', relationshipRoutes)
+
 
 server.get('/', (req, res) => {
     res.send('Hello, world!');
