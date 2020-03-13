@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
 const usersModel = require('./user-model.js');
 const genToken = require('../auth/token.js').genToken
@@ -52,6 +53,34 @@ router.post('/login', (req, res) => {
         .catch(err => {
             res.status(500).json({message: 'check login',err})
         })
+})
+
+router.post('/update', (req, res) => {
+    const token = req.headers.authorization
+    if (token) {
+        jwt.verify(
+          token,
+          require('../auth/secret.js').jwtSecret,
+          (err, decodedToken) => {
+            if (err) {
+              res.status(401).json({ message: 'invalid token' });
+            } else {
+                const current = decodedToken;
+                const id = current.subject
+                console.log(id)
+                usersModel.updateUser(id, req.body)
+                .then(count =>{
+                    console.log(count)
+                    res.status(200).json({count})
+                        })
+                .catch(err=>res.status(500).json(err))
+            }
+          }
+        );
+      } else {
+        res.status(401).json({ message: 'no token provided' });
+      }
+    
 })
 
 module.exports = router;

@@ -1,11 +1,16 @@
 
-exports.up = function(knex) {
+exports.up = function (knex) {
     return knex.schema.createTable('tweet', tbl => {
         tbl.increments()
 
         tbl
-            .integer('creator')
+            .integer('user_id')
+            .unsigned()
             .notNullable()
+            .references('id')
+            .inTable('users')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE');
 
 
         tbl
@@ -24,7 +29,7 @@ exports.up = function(knex) {
     })
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
     return knex.schema
-    .dropTableIfExists('tweet')
+        .dropTableIfExists('tweet')
 };

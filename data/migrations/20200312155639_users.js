@@ -37,14 +37,14 @@ exports.up = function (knex) {
 
 
         tbl
-            .specificType('followers', 'INTEGER[]')
+            .integer('followers')
 
 
         tbl
-            .specificType('following', 'INTEGER[]')
+            .integer('following')
 
         tbl
-            .specificType('tweets', 'STRING[]')
+            .integer('tweets')
     })
 };
 

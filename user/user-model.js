@@ -4,7 +4,8 @@ module.exports = {
     getUsers,
     register,
     findById,
-    findBy
+    findBy,
+    updateUser
 }
 
 function getUsers(){
@@ -23,4 +24,10 @@ function findById(id){
 
 function findBy(filter){
     return db('user').where(filter)
+}
+
+function updateUser(id, changes) {
+    return db('user')
+        .where({id})
+        .update(changes)
 }
