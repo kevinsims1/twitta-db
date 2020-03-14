@@ -8,7 +8,7 @@ exports.up = function (knex) {
             .unsigned()
             .notNullable()
             .references('id')
-            .inTable('users')
+            .inTable('user')
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
 
@@ -18,14 +18,14 @@ exports.up = function (knex) {
 
 
         tbl
-            .specificType('likes', 'INTEGER[]')
+            .integer('likes')
 
 
         tbl
-            .specificType('retweets', 'INTEGER[]')
+            .integer('retweets')
 
         tbl
-            .specificType('comments', 'STRING[]')
+            .integer('comments')
     })
 };
 

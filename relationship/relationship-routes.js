@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
 const relationshipModel = require('./relationship-model.js');
-const genToken = require('../../auth/token.js').genToken
+const genToken = require('../auth/token.js').genToken
 
 const router = express.Router();
 

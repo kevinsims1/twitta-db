@@ -38,13 +38,16 @@ exports.up = function (knex) {
 
         tbl
             .integer('followers')
+            .defaultTo(0)
 
 
         tbl
             .integer('following')
+            .defaultTo(0)
 
         tbl
             .integer('tweets')
+            .defaultTo(0)
     })
 };
 
