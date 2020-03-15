@@ -7,16 +7,17 @@ const server = express();
 //Configures routes
 const userRoutes = require('./user/user-routes.js')
 const relationshipRoutes = require('./relationship/relationship-routes.js')
+const tweetRoutes = require('./tweet/tweet-routes.js')
 
 //middleware
 server.use(helmet())
 server.use(cors())
 server.use(express.json())
 
-//TODO: After schemas create routes
+//routes
 server.use('/users', userRoutes)
 server.use('/relationship', relationshipRoutes)
-
+server.use('/tweet', tweetRoutes)
 
 server.get('/', (req, res) => {
     res.send('Hello, world!');

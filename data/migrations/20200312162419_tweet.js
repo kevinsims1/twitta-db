@@ -12,6 +12,9 @@ exports.up = function (knex) {
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
 
+        tbl
+            .string('tweet')
+
 
         tbl
             .timestamp('created_at').defaultTo(knex.fn.now())
@@ -19,13 +22,17 @@ exports.up = function (knex) {
 
         tbl
             .integer('likes')
+            .defaultTo(0)
 
 
         tbl
             .integer('retweets')
+            .defaultTo(0)
 
         tbl
             .integer('comments')
+            .defaultTo(0)
+
     })
 };
 
