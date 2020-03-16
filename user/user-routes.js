@@ -83,4 +83,18 @@ router.post('/update', (req, res) => {
     
 })
 
+router.get('/:id',(req,res) => {
+    const id = req.params.id
+    usersModel.findById(id)
+    .then(user => {
+        res.status(200).json({
+            user: user
+        })
+    })
+    .catch(err=>{
+        res.status(500).json({
+            err
+        })
+    })
+})
 module.exports = router;
