@@ -1,4 +1,5 @@
 const db = require('../data/dbConfig.js');
+const usersModel = require('../user/user-model')
 
 module.exports = {
     getTweets,
@@ -7,8 +8,22 @@ module.exports = {
     findBy
 }
 
-function getTweets(){
-    return db('tweet')
+async function getTweets(){
+    const tweets = await db('tweet')
+    console.log('tweets:', tweets)
+    const usersPromises = tweets.map(async (tweet) => {
+        const user = await usersModel.findById(tweet.user_id)
+        // console.log(user)
+        return user
+    })
+    const users = await Promise.all(usersPromises)
+
+    const response = {
+        tweets,
+        users
+    }
+
+    return response
 }
 
 async function makeTweet(tweet) {
