@@ -17,6 +17,10 @@ exports.up = function (knex) {
         tbl
             .string('bio')
 
+            
+        tbl
+            .string('avi')
+
 
         tbl
             .string('password')
